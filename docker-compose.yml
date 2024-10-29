@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: customdatabase
+      POSTGRES_USER: customuser
+      POSTGRES_PASSWORD: custompassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    command: ["python", "main.py"]
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=myapp.settings
+      - DATABASE_URL=postgres://customuser:custompassword@db:5432/customdatabase
+    networks:
+      - mynetwork
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      #- "8081:8080"
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - API_URL=http://backend:8000
+    networks:
+      - mynetwork  
+
+networks:
+  mynetwork:
+
+volumes:
+  postgres_data:

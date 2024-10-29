@@ -1,0 +1,10 @@
+# Exclude node_modules and build directories
+node_modules
+build
+
+# Exclude other unnecessary files
+*.log
+*.tmp
+*.swp
+
+frontend/windows/flutter/ephemeral/.plugin_symlinks/

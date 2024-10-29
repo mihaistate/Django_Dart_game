@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../game/backend"
+		},
+		{
+			"path": "../../game/frontend"
+		}
+	],
+	"settings": {}
+}

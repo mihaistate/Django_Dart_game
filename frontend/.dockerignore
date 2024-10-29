@@ -1,0 +1,14 @@
+# Exclude node_modules and build directories
+node_modules
+build
+
+.flutter-plugins
+.flutter-plugins-dependencies
+.gitignore
+.metadata
+analysis_options.yaml
+
+# Exclude other unnecessary files
+*.log
+*.tmp
+*.swp
